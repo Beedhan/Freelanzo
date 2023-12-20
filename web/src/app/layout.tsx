@@ -1,5 +1,4 @@
-import { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import type{ Metadata } from "next";
 import { TailwindIndicator } from "~/components/tailwind-indicator";
 import { Toaster } from "~/components/ui/toaster";
 import { AppProvider } from "~/context/AppContext";
@@ -14,10 +13,7 @@ export const metadata:Metadata = {
   title:"Freelanzo"
 }
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+
 
 interface RootLayoutProps {
   children: React.ReactNode;

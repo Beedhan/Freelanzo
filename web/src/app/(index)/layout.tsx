@@ -5,16 +5,16 @@ import Navbar from "~/components/Navbar";
 interface HomeLayoutProps {
   children: React.ReactNode;
 }
-export default function HomeLayout({ children }: HomeLayoutProps) {
+export default function Layout({ children }: HomeLayoutProps) {
   return (
     <div className="w-full py-2">
-      <div className="shadow-md">
+      {/* <div className="shadow-md">
         <Navbar />
-      </div>
+      </div> */}
       {children}
-      <div className="mt-4 px-20">
+      {/* <div className="mt-4 px-20">
         <Footer />
-      </div>
+      </div> */}
     </div>
   );
 }

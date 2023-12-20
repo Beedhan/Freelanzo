@@ -2,11 +2,15 @@ import { type NextPage } from "next";
 import Link from "next/link";
 import Footer from "~/components/Footer";
 import LogoCloud from "~/components/LogoCloud";
+import Navbar from "~/components/Navbar";
 import Stats from "~/components/Stats";
 
 const Home: NextPage = () => {
   return (
     <>
+     <div className="shadow-md">
+        <Navbar />
+      </div>
       <section className="bg-gray-50">
         <div className="mx-auto max-w-screen-xl px-4 py-16 lg:flex  lg:items-center">
           <div className="mx-auto max-w-xl text-center">
@@ -168,6 +172,9 @@ const Home: NextPage = () => {
       </section>
 
       <Stats />
+      <div className="mt-4 px-20">
+        <Footer />
+      </div>
     </>
   );
 };
