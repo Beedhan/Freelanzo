@@ -86,7 +86,7 @@ const ClientTable = () => {
                     <TableCell className=" flex items-center gap-2 font-medium">
                       <Avatar>
                         <AvatarImage
-                          src={client.user.image}
+                          src={client.user.image as string}
                           alt="@shadcn"
                         />
                         <AvatarFallback>{client?.user?.name}</AvatarFallback>

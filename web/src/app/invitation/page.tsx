@@ -5,13 +5,18 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import AuthForm from "~/components/AuthForm";
 import { toast } from "~/components/ui/use-toast";
 import { api } from "~/utils/api";
 import { useRouter } from 'next/navigation'
 
+function PageFallback() {
+  return <>Loading</>
+}
+
 export default function Invitation() {
+  const params = useSearchParams();
   const { status } = useSession();
   const router = useRouter();
   const mutation = api.workspace.join.useMutation({
@@ -27,7 +32,6 @@ export default function Invitation() {
       return router.replace("/")
     },
   });
-  const params = useSearchParams();
 
   useEffect(() => {
     const inviteId = params?.get("inviteId");
@@ -48,6 +52,7 @@ export default function Invitation() {
       <Head>
         <title>Workspace Invitation</title>
       </Head>
+      <Suspense fallback={<PageFallback />}>
       <div className="flex h-screen w-full items-center justify-center">
         <div className="mx-auto flex w-[25%] flex-col items-center justify-center space-y-6 rounded-lg p-3 shadow-custom">
           <Link href={"/"}>
@@ -63,6 +68,7 @@ export default function Invitation() {
           <AuthForm />
         </div>
       </div>
+      </Suspense>
     </>
   );
 }
