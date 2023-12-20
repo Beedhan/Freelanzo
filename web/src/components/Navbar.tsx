@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { cn } from "~/utils/lib";
+import * as React from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,12 +12,11 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "~/components/ui/navigation-menu";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import { cn } from "~/utils/lib";
 
-import { api } from "~/utils/api";
-import Logo from "./Logo";
 import type { Session } from "next-auth";
 import { useRouter } from "next/navigation";
+import Logo from "./Logo";
 import { Button } from "./ui/button";
 
 const components: { title: string; href: string; description: string }[] = [

@@ -1,5 +1,4 @@
 import Navbar from "~/components/Navbar";
-import { getSession } from "~/utils/session";
 
 interface HomeLayoutProps {
   children: React.ReactNode;
