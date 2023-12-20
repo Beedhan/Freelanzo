@@ -6,13 +6,9 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the  annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
-    // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 // Necessary for Next auth
@@ -207,6 +203,7 @@ model Services {
     workspaceId String?
     Invoice     Invoice[]
 }
+
 model Checkout {
     id          String    @id @default(cuid())
     workspace   Workspace @relation(fields: [workspaceId], references: [id])
@@ -252,7 +249,6 @@ enum InvoiceStatus {
     PAID
     CANCELLED
 }
-
 
 enum WorkspaceStatus {
     SENT
