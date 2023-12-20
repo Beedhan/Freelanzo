@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import Link from "next/link";
 import Footer from "~/components/Footer";
 import LogoCloud from "~/components/LogoCloud";
 import Stats from "~/components/Stats";
@@ -25,12 +26,12 @@ const Home: NextPage = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a
+              <Link
                 className="block w-full rounded bg-[#004aad] px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-                href="/"
+                href="/login"
               >
                 Get Started
-              </a>
+              </Link>
 
               <a
                 className="block w-full rounded px-12 py-3 text-sm font-medium text-[#004aad] shadow hover:text-[#004aad] focus:outline-none focus:ring active:text-[#004aad] sm:w-auto"
@@ -167,10 +168,6 @@ const Home: NextPage = () => {
       </section>
 
       <Stats />
-
-      <div className="mt-4 px-20">
-        <Footer />
-      </div>
     </>
   );
 };
