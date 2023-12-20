@@ -8,9 +8,6 @@ import Stats from "~/components/Stats";
 const Home: NextPage = () => {
   return (
     <>
-     <div className="shadow-md">
-        <Navbar />
-      </div>
       <section className="bg-gray-50">
         <div className="mx-auto max-w-screen-xl px-4 py-16 lg:flex  lg:items-center">
           <div className="mx-auto max-w-xl text-center">
@@ -32,7 +29,7 @@ const Home: NextPage = () => {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 className="block w-full rounded bg-[#004aad] px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-                href="/login"
+                href="login"
               >
                 Get Started
               </Link>
@@ -172,9 +169,6 @@ const Home: NextPage = () => {
       </section>
 
       <Stats />
-      <div className="mt-4 px-20">
-        <Footer />
-      </div>
     </>
   );
 };

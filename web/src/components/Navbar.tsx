@@ -12,8 +12,6 @@ import {
   navigationMenuTriggerStyle,
 } from "~/components/ui/navigation-menu";
 import { cn } from "~/utils/lib";
-
-import type { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import Logo from "./Logo";
 import { Button } from "./ui/button";
@@ -50,10 +48,6 @@ const components: { title: string; href: string; description: string }[] = [
     description: "Keep clients in the loop",
   },
 ];
-
-interface SiteHeaderProps {
-  session: Session | null;
-}
 
 export default function Navbar() {
   return (
@@ -102,7 +96,7 @@ export default function Navbar() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>{" "}
-      <AuthShowcase  />
+      <AuthShowcase />
     </div>
   );
 }
@@ -138,15 +132,17 @@ const AuthShowcase = () => {
   const session = useSession();
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-        <Button
-        className="hover:bg-primary hover:text-white p-5 border-primary border-2"
+      <Button
+        className="border-2 border-primary p-5 hover:bg-primary hover:text-white"
         variant={"outline"}
         onClick={
-          session.status==="authenticated" ? () => router.push("/inbox") : () => void signIn()
+          session.status === "authenticated"
+            ? () => router.push("/inbox")
+            : () => void signIn()
         }
-        disabled={session.status==="loading"}
+        disabled={session.status === "loading"}
       >
-        {session.status==="authenticated" ? "Dashboard" : "Sign in"}
+        {session.status === "authenticated" ? "Dashboard" : "Sign in"}
       </Button>
     </div>
   );
