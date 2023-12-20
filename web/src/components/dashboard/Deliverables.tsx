@@ -1,22 +1,14 @@
-import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "~/components/ui/dialog";
-import { FilterIcon, Menu, MenuIcon, MoreHorizontal, Plus, SearchIcon, SlidersHorizontal, Upload } from "lucide-react";
-import { Metadata } from "next";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Plus, SearchIcon, SlidersHorizontal, Upload } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "~/components/ui/dialog";
 
 
+import { Label } from "@radix-ui/react-label";
 import {
   Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "~/components/ui/table"
+  TableCaption
+} from "~/components/ui/table";
 import { DialogFooter, DialogHeader } from "../ui/dialog";
-import { Label } from "@radix-ui/react-label";
-import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 

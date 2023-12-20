@@ -1,12 +1,10 @@
-import { TRPCClientError } from "@trpc/client";
 import { TRPCError } from "@trpc/server";
-import { z } from "zod";
 import _stripe from "stripe";
+import { z } from "zod";
 
 import {
   createTRPCRouter,
-  publicProcedure,
-  protectedProcedure,
+  protectedProcedure
 } from "~/server/api/trpc";
 
 export const checkoutRouter = createTRPCRouter({

@@ -2,8 +2,6 @@
 import { Accordion } from "@radix-ui/react-accordion";
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
-import { MoreHorizontal, SearchIcon, SlidersHorizontal } from "lucide-react";
-import { Metadata } from "next";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import { Button, buttonVariants } from "~/components/ui/button";
+import { buttonVariants } from "~/components/ui/button";
 import { api } from "~/utils/api";
 
 const page = () => {
@@ -111,10 +109,5 @@ function ClientTable() {
     </div>
   );
 }
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Dashboard page",
-};
 
 export default page;

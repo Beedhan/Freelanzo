@@ -1,20 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React, { useState } from "react";
-import { Metadata } from "next";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Briefcase } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import Tasks from "~/components/dashboard/Tasks";
-import Conversation from "~/components/dashboard/Conversation";
-import Files from "~/components/dashboard/Files";
-import Deliverables from "~/components/dashboard/Deliverables";
-import Invoices from "~/components/dashboard/Invoices";
-import InternalNotes from "~/components/dashboard/InternalNotes";
-import { api } from "~/utils/api";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
+import Conversation from "~/components/dashboard/Conversation";
+import Files from "~/components/dashboard/Files";
+import InternalNotes from "~/components/dashboard/InternalNotes";
+import Invoices from "~/components/dashboard/Invoices";
+import Tasks from "~/components/dashboard/Tasks";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { api } from "~/utils/api";
 
 const page = ({ params }: { params: { id: string[] } }) => {
   const { data: user } = useSession();
