@@ -4,7 +4,7 @@ import { Copy } from "lucide-react";
 import { FileUpIcon, MoreVertical, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import CreateForm from "~/components/invoice/CreateForm";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -35,18 +35,22 @@ import { api } from "~/utils/api";
 import { HOST_URL } from "~/utils/lib";
 
 function PageFallback() {
-  return (<>Loading</>);
+  return <>Loading</>;
 }
 
 export default function DemoPage() {
   const { data } = useSession();
   const router = useRouter();
-  if (!data?.user.isWorkspaceOwner) {
-    return router.replace("/404");
-  }
+  useEffect(() => {
+    if (!data?.user.isWorkspaceOwner) {
+      return router.replace("/404");
+    }
+  }, [data?.user.isWorkspaceOwner,router])
   return (
     <div className="container mx-auto py-10">
-      <ClientTable />
+      <Suspense fallback={<PageFallback />}>
+        <ClientTable />
+      </Suspense>
     </div>
   );
 }
@@ -79,7 +83,6 @@ function ClientTable() {
   };
   return (
     <>
-    <Suspense fallback={<PageFallback/>}>
       <div>
         <div className="flex justify-between">
           <h3 className="mb-5 mt-10 text-xl font-bold text-slate-700">
@@ -182,7 +185,6 @@ function ClientTable() {
           </TableBody>
         </Table>
       </div>
-    </Suspense>
     </>
   );
 }

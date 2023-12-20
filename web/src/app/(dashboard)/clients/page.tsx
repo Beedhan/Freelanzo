@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Suspense, useEffect } from "react";
 import { Container } from "~/components/shared/Container";
 import {
   AccordionContent,
@@ -15,15 +16,26 @@ import {
 import { buttonVariants } from "~/components/ui/button";
 import { api } from "~/utils/api";
 
+function PageFallback() {
+  return <>Loading</>;
+}
+
 const Client = () => {
   const { data } = useSession();
   const router = useRouter();
-  if (!data?.user.isWorkspaceOwner) {
-    return router.replace("/404");
-  }
+  
+  useEffect(() => {
+    if (!data?.user.isWorkspaceOwner) {
+      return router.replace("/404");
+    }
+  }, [data?.user.isWorkspaceOwner,router])
+  
+
   return (
     <div className="w-full p-5 pl-10">
-      <ClientTable />
+      <Suspense fallback={<PageFallback />}>
+        <ClientTable />
+      </Suspense>
     </div>
   );
 };
