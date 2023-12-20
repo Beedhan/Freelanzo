@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "icon": "./assets/icon.png",
+    "android": {
+      
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "splash": {
+      "image": "./assets/icon.png"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "app",
+    "slug": "app",
+    "plugins": [
+      [
+        "./plugins/withAndroidMainActivityAttributes",
+        {
+          "android:showWhenLocked": true,
+          "android:turnScreenOn": true,
+          "android:usesCleartextTraffic":false
+        }
+      ]
+    ]
+  }
+}
