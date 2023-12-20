@@ -142,7 +142,7 @@ const Sidebar = () => {
                   variant="destructive"
                   size="sm"
                   className="flex items-center justify-center p-2"
-                  onClick={() => handleRemove(client.user?.id as string)}
+                  onClick={() => handleRemove(client.user.id)}
                 >
                   <Trash size={14} />
                 </Button>}

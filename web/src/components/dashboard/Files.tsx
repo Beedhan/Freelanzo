@@ -73,7 +73,8 @@ function ClientTable({ projectId }: { projectId: string }) {
     setFileId(id);
     setShowLockDialog(true);
   };
-  const handleNavigation = (id: string) => {
+  const handleNavigation = (id: string|undefined) => {
+    if(!id)return;
     window.open(`${HOST_URL}/invoice/pay/${id}`);
   };
   const handleDelete = (fileId: string) => {
@@ -210,7 +211,7 @@ function ClientTable({ projectId }: { projectId: string }) {
                         </>
                       ) : (
                         <>
-                          {file.Invoice === null ? (
+                          {(file.Invoice === null) ? (
                             <></>
                           ) : (
                             file?.Invoice?.status !== "PAID" && (

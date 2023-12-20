@@ -42,19 +42,19 @@ function KanbanBoard({
   const [activeColumn, setActiveColumn] = useState<TaskSection | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const util = api.useContext();
-  const {mutate} = api.tasks.updateSectionsPlacements.useMutation();
+  const { mutate } = api.tasks.updateSectionsPlacements.useMutation();
 
-  const handleMutate = ()=>{
+  const handleMutate = () => {
     void mutate({
       projectId,
-      taskSections:columnsId,
-    })
-  }
+      taskSections: columnsId,
+    });
+  };
   useEffect(() => {
     handleMutate();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedTaskIds])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedTaskIds]);
+
   const taskSectionMutation = api.tasks.createSection.useMutation({
     onSuccess: () => {
       void util.tasks.invalidate();
@@ -134,7 +134,6 @@ function KanbanBoard({
               createNewColumn();
             }}
             className="
-      ring-new
       flex
       h-[60px]
       w-[350px]
@@ -144,6 +143,7 @@ function KanbanBoard({
       rounded-lg
       border-2
       p-4
+      ring-new
       hover:ring-2
       "
           >
@@ -260,11 +260,13 @@ function KanbanBoard({
 
   function onDragStart(event: DragStartEvent) {
     if (event.active.data.current?.type === "Column") {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       setActiveColumn(event.active.data.current.column);
       return;
     }
 
     if (event.active.data.current?.type === "Task") {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       setActiveTask(event.active.data.current.task);
       return;
     }
@@ -301,7 +303,7 @@ function KanbanBoard({
     if (!over) return;
 
     const activeId = active.id;
-    const overId = over.id;
+    const overId = over.id as string;
 
     if (activeId === overId) return;
 
@@ -317,10 +319,12 @@ function KanbanBoard({
         const overIndex = tasks.findIndex((t) => t.id === overId);
 
         if (
+          tasks[activeIndex] &&
+          tasks[overIndex] &&
           tasks[activeIndex]?.taskSectionId != tasks[overIndex]?.taskSectionId
         ) {
           // Fix introduced after video recording
-          tasks[activeIndex].taskSectionId = tasks[overIndex].taskSectionId;
+          tasks[activeIndex]!.taskSectionId = tasks[overIndex]!.taskSectionId;
           return arrayMove(tasks, activeIndex, overIndex - 1);
         }
 
@@ -334,7 +338,7 @@ function KanbanBoard({
     if (isActiveATask && isOverAColumn) {
       setTasks((tasks) => {
         const activeIndex = tasks.findIndex((t) => t.id === activeId);
-        tasks[activeIndex].taskSectionId = overId;
+        tasks[activeIndex]!.taskSectionId = overId;
         console.log("DROPPING TASK OVER COLUMN", { activeIndex });
         return arrayMove(tasks, activeIndex, activeIndex);
       });

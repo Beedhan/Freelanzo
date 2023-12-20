@@ -15,7 +15,7 @@ import {
 import { buttonVariants } from "~/components/ui/button";
 import { api } from "~/utils/api";
 
-const page = () => {
+const Client = () => {
   const { data } = useSession();
   const router = useRouter();
   if (!data?.user.isWorkspaceOwner) {
@@ -110,4 +110,4 @@ function ClientTable() {
   );
 }
 
-export default page;
+export default Client;

@@ -15,7 +15,7 @@ export default async function handler(
       let Cookie
         const response = await fetch(`${HOST_URL}/api/auth/csrf`).then(
         (res) => {
-          const parsedCookie = cookie.parse(res.headers.get('set-cookie'))
+          const parsedCookie = cookie.parse(res.headers.get('set-cookie') as string)
           delete parsedCookie.Path
           delete parsedCookie.SameSite
           Cookie = Object.entries(parsedCookie)
@@ -29,7 +29,7 @@ export default async function handler(
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          Cookie,
+          Cookie:Cookie||"",
         },
         body: new URLSearchParams({
           email: req.body.email,
@@ -45,14 +45,15 @@ export default async function handler(
       console.log(parsedCookie)
       const regex = /next-auth.session-token=([^;]+)/;
       const matches = parsedCookie?.match(regex);
+      if(!matches)return;
       const sessionToken = matches[1];
 
-      return nextRes.setHeader('set-cookie', `next-auth.session-token=${sessionToken}; Path=/; Expires=Fri, 28 Jul 2023 19:07:12 GMT; HttpOnly; SameSite=Lax`).json({ sessionToken })
+      return nextRes.setHeader('set-cookie', `next-auth.session-token=${sessionToken as string}; Path=/; Expires=Fri, 28 Jul 2023 19:07:12 GMT; HttpOnly; SameSite=Lax`).json({ sessionToken })
     } else {
       return "aru aayo yrr";
       // Handle any other HTTP method
     }
-  } catch (error) {
+  } catch (error:any) {
     console.log(error);
     return nextRes.json({ error: error?.message });
   }

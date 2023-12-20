@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 "use client";
 import { format } from "date-fns";
 import { Download, FileUpIcon } from "lucide-react";
@@ -19,8 +20,12 @@ import { api } from "~/utils/api";
 import { HOST_URL } from "~/utils/lib";
 import { Button } from "../ui/button";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
+import "jspdf-autotable"
+import type{UserOptions} from  "jspdf-autotable";
 
+interface jsPDFCustom extends jsPDF {
+  autoTable?: (options:UserOptions) => void;
+}
 const Invoices = ({ projectId }: { projectId: string }) => {
   return (
     <div className="w-full p-5 pl-10">
@@ -59,7 +64,7 @@ function ClientTable({ projectId }: { projectId: string }) {
     price: number;
     username: string;
   }) => {
-    const doc = new jsPDF();
+    const doc:jsPDFCustom = new jsPDF();
     // Set document font size and style
     doc.setFontSize(25);
     doc.setFont("helvetica", "bold");
@@ -88,11 +93,13 @@ function ClientTable({ projectId }: { projectId: string }) {
     doc.text(`Due: ${invoiceDueDate}`, 150, 65);
 
     // Add table with invoice data
-    doc.autoTable({
-      startY: 90,
-      head: [["Description", "Quantity", "Price", "Total"]],
-      body: [[itemName, 1, price, price]],
-    });
+    if(doc.autoTable){
+      doc.autoTable({
+        startY: 90,
+        head: [["Description", "Quantity", "Price", "Total"]],
+        body: [[itemName, 1, price, price]],
+      });
+    }
 
     // Calculate and add total amount
     doc.text("Total Amount: $" + price.toFixed(2), 150, 120);
@@ -148,7 +155,7 @@ function ClientTable({ projectId }: { projectId: string }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.map((invoice) => (
+          {user&&data?.map((invoice) => (
             <TableRow key={invoice.id}>
               <TableCell className=" flex items-center gap-2 font-medium">
                 <FileUpIcon />{" "}

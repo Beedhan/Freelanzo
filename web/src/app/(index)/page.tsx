@@ -1,5 +1,4 @@
 import { type NextPage } from "next";
-import Image from "next/image";
 import Footer from "~/components/Footer";
 import LogoCloud from "~/components/LogoCloud";
 import Stats from "~/components/Stats";
@@ -99,7 +98,7 @@ const Home: NextPage = () => {
                 Upload and download files with ease, keeping all your important
                 documents and assets in one secure place. Collaborate
                 efficiently, share files with clients, and streamline your
-                workflow. Try our CRM's file management feature and take your
+                workflow. Try our {"CRM's"} file management feature and take your
                 freelance business to the next level.
               </p>
             </div>
@@ -126,7 +125,7 @@ const Home: NextPage = () => {
               </h2>
 
               <p className="mt-4 text-gray-600">
-                Stay connected and collaborate effortlessly with our CRM's
+                Stay connected and collaborate effortlessly with our {"CRM's"}
                 integrated chat system for freelancers. Communicate with
                 clients, team members, and collaborators in real-time, ensuring
                 nothing falls through the cracks. Seamlessly discuss projects,
@@ -160,7 +159,7 @@ const Home: NextPage = () => {
                 Create and send professional invoices in minutes, keeping your
                 cash flow steady. Track payments, set reminders, and stay on top
                 of your earnings effortlessly. Elevate your freelancing business
-                with our CRM's invoicing feature.
+                with our {"CRM's"} invoicing feature.
               </p>
             </div>
           </div>

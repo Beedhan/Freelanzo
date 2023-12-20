@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddCard = ({ addCard }) => {
+const AddCard = ({ addCard }:{addCard:(title:string)=>void}) => {
   const [title, setTitle] = useState("");
 
   return (
