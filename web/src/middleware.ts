@@ -8,4 +8,15 @@ export default withAuth({
   },
 });
 
-export const config = { matcher: ["/dashboard/:path*", "/projects/:path*","/invoice/:path*"] };
+export const config = {
+  matcher: [
+    "/invoice/:path*",
+    "/dashboard/:path*",
+    "/projects/:path*",
+    "/inbox/:path*",
+    "/services/:path*",
+    "/workspace/:path*",
+    "/checkout/:path*",
+    "/quotes/:path*",
+  ],
+};
